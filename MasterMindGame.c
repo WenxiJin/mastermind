@@ -16,7 +16,6 @@ bool checkGuess(int secret_code, int guess, int *result);
 int giveBestGuess(bool invalidCode[], int previous_guess, int previous_result);
 int compare(int secret_code, int guess);
 
-
 // ************************************************************************
 int main(int argc, char *argv[]) {
     int secret_code = 0;
@@ -140,10 +139,10 @@ void gussByMachine(int secret_code, bool invalidCode[]) {
     int best_guess = 1122;  // Best initial guess
     int result = 0;
 
-    printf("Trying initial guess with code: %d\n", best_guess);
+    printf("Trying initial guess code: %d\n", best_guess);
     while (!checkGuess(secret_code, best_guess, &result)) {
         best_guess = giveBestGuess(invalidCode ,best_guess, result);
-        printf("Trying guess with code: %d\n", best_guess);
+        printf("Trying guess code: %d\n", best_guess);
     }
 
     printf("The secret code: %d\n", secret_code);
