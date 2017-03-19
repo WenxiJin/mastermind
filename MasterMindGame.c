@@ -10,10 +10,10 @@
 bool guessByUser(int secret_code, int *result);
 int getUserGuess(int count);
 
-void gussByMachine(int secret_code, bool hasCodeTried[]);
+void gussByMachine(int secret_code, bool invalidCode[]);
 
 bool checkGuess(int secret_code, int guess, int *result);
-int giveBestGuess(bool hasCodeTried[], int previous_guess, int previous_result);
+int giveBestGuess(bool invalidCode[], int previous_guess, int previous_result);
 int compare(int secret_code, int guess);
 
 
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     int result = 0;
     // we need to keep track on the code we
     // have tried and we can eliminate
-    bool hasCodeTried[9000] = {false};  // 1000...9999 => 9000
+    bool invalidCode[9000] = {false};  // 1000...9999 => 9000
   
     // Ask for giving a secret code
     while (secret_code < 1000 || secret_code > 9999) {
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     }
     printf("You failed at breaking the code :(\n\n");
 
-    gussByMachine(secret_code, hasCodeTried);
+    gussByMachine(secret_code, invalidCode);
 
     return 0;
 }
@@ -54,14 +54,14 @@ bool checkGuess(int secret_code, int guess, int *result) {
     return *result == 40 ? true : false;
 }
 
-int giveBestGuess(bool hasCodeTried[], int previous_guess, int previous_result) {
+int giveBestGuess(bool invalidCode[], int previous_guess, int previous_result) {
     for (int i = 1000; i <= 9999; i++) {
-        if (!hasCodeTried[i-1000] && compare(i , previous_guess) != previous_result) {
-            hasCodeTried[i-1000] = true;
+        if (!invalidCode[i-1000] && compare(i , previous_guess) != previous_result) {
+            invalidCode[i-1000] = true;
         }
     }
     int i = 0;
-    while (hasCodeTried[i]) {
+    while (invalidCode[i]) {
         i++;
     }
     return i + 1000;
@@ -148,14 +148,14 @@ bool guessByUser(int secret_code, int *result) {
     return false;
 }
 
-void gussByMachine(int secret_code, bool hasCodeTried[]) {
+void gussByMachine(int secret_code, bool invalidCode[]) {
     // Now let the computer to break this secret code
     int best_guess = 1122;  // Best initial guess
     int result = 0;
 
     printf("Trying initial guess with code: %d\n", best_guess);
     while (!checkGuess(secret_code, best_guess, &result)) {
-        best_guess = giveBestGuess(hasCodeTried ,best_guess, result);
+        best_guess = giveBestGuess(invalidCode ,best_guess, result);
         printf("Trying guess with code: %d\n", best_guess);
     }
 
