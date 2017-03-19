@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
   while (secret_code < 1000 || secret_code > 9999) {
     char *p = NULL;
     p = getpass("Enter 4-digit secret code: ");
-    secret_code = atoi(p);
+    secret_code = strtol(p, NULL, 10);
   }
 
   if (guessByUser(secret_code, &result)) {
@@ -71,6 +71,8 @@ int compare(int secret_code, int guess) {
   int a[4];
   int b[4];
   int m = 0, n = 0;
+  int checkSecret[4] = {1};
+  int checkGuess[4] = {1};
 
   for (int i = 3; i >= 0; i--) {
     a[i] = guess % 10;
@@ -80,17 +82,34 @@ int compare(int secret_code, int guess) {
   }
 
   for (int i = 0; i < 4; i++) {
-    if (a[i] == b[i]) {  // color && position
+    if (a[i] == b[i]) {
+      // color and position
       m++;
-      continue;
+      checkSecret[i] = checkGuess[i] = 0;
     }
+  }
+
+  for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
-      if (a[i] == b[j]) {  // color only
+      if (a[i] == b[j] && checkGuess[i] && checkSecret[j] && i != j) {
         n++;
-        break;
+        checkGuess[i] = checkSecret[j] = 0;
       }
     }
   }
+
+  /* for (int i = 0; i < 4; i++) { */
+  /*   if (a[i] == b[i]) {  // color && position */
+  /*     m++; */
+  /*     continue; */
+  /*   } */
+  /*   for (int j = 0; j < 4; j++) { */
+  /*     if (a[i] == b[j]) {  // color only */
+  /*       n++; */
+  /*       break; */
+  /*     } */
+  /*   } */
+  /* } */
   return m * 10 + n;
 }
 
@@ -123,7 +142,7 @@ bool guessByUser(int secret_code, int *result) {
       printf("Congratulations! You break the secret code: %d\n", secret_code);
       return true;
     }
-    printf("---------> %d\n", *result);
+    printf("=========> %d\n", *result);
     try_count++;
   }
   return false;
