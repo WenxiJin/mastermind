@@ -8,13 +8,13 @@
 #define false 0
 
 bool guessByUser(int secret_code, int *result);
-int  getUserGuess(int count);
+int getUserGuess(int count);
 
 void gussByMachine(int secret_code, bool invalidCode[]);
 
 bool checkGuess(int secret_code, int guess, int *result);
-int  giveBestGuess(bool invalidCode[], int previous_guess, int previous_result);
-int  compare(int secret_code, int guess);
+int giveBestGuess(bool invalidCode[], int previous_guess, int previous_result);
+int compare(int secret_code, int guess);
 
 // ************************************************************************
 int main(int argc, char *argv[]) {
@@ -128,7 +128,7 @@ bool guessByUser(int secret_code, int *result) {
             printf("Congratulations! You break the secret code: %d\n", secret_code);
             return true;
         }
-        printf("=========> %d\n", *result);
+        printf("=========> %02d\n", *result);
         try_count++;
     }
     return false;
