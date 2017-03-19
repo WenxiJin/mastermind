@@ -97,19 +97,6 @@ int compare(int secret_code, int guess) {
             }
         }
     }
-
-    /* for (int i = 0; i < 4; i++) { */
-    /*   if (a[i] == b[i]) {  // color && position */
-    /*     m++; */
-    /*     continue; */
-    /*   } */
-    /*   for (int j = 0; j < 4; j++) { */
-    /*     if (a[i] == b[j]) {  // color only */
-    /*       n++; */
-    /*       break; */
-    /*     } */
-    /*   } */
-    /* } */
     return m * 10 + n;
 }
 
