@@ -8,6 +8,7 @@ set(gtest_SOURCE_DIR "${PROJECT_SOURCE_DIR}/googletest")
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 # unittest
+# NOTE: test files are named in cpp since googletest is a c++
 add_executable(testfeedback testfeedback.cpp)
 target_link_libraries(testfeedback gtest gtest_main libfeedback)
 add_test(testfeedback testfeedback)
