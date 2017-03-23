@@ -14,18 +14,28 @@ int main(int argc, char *argv[]) {
     // have tried and we can eliminate
     bool invalidCode[9000] = {false};  // 1000...9999 => 9000
 
+    printf("\n########################################################\n");
+    printf(  "##                Welcome to MasterMind               ##\n");
+    printf(  "########################################################\n\n");
+
     // Ask for giving a secret code
     while (secret_code < 1000 || secret_code > 9999) {
         char *p = NULL;
-        p = getpass("Enter 4-digit secret code: ");
+        p = getpass("Enter 4-digit secret code [1000~9999]: ");
         secret_code = strtol(p, NULL, 10);
+        if (secret_code < 1000 || secret_code > 9999) {
+            printf("Invalid secret code, valid range [1000~9999]\n");
+        } else {
+            break;
+        }
     }
 
     if (guessByUser(secret_code, &result)) {
         return 0;
     }
-    printf("You failed at breaking the code :(\n\n");
+    printf("You lost :(\n\n");
 
+    printf("Now machine is guessing ...\n");
     gussByMachine(secret_code, invalidCode);
 
     return 0;

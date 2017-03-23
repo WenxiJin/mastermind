@@ -28,7 +28,7 @@ bool guessByUser(int secret_code, int *result) {
     while (try_count < MAX_TRY) {
         int user_guess = getUserGuess(try_count);
         if (checkGuess(secret_code, user_guess, result)) {
-            printf("Congratulations! You break the secret code: %d\n", secret_code);
+            printf("\nCongratulations! You break the secret code: %d\n", secret_code);
             return true;
         }
         printf("=========> %02d\n", *result);
