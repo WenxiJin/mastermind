@@ -14,9 +14,9 @@ int main(int argc, char *argv[]) {
     // have tried and we can eliminate
     bool invalidCode[9000] = {false};  // 1000...9999 => 9000
 
-    printf("\n########################################################\n");
-    printf(  "##                Welcome to MasterMind               ##\n");
-    printf(  "########################################################\n\n");
+    printf("\n********************************************************\n");
+    printf(  "**                Welcome to MasterMind               **\n");
+    printf(  "********************************************************\n\n");
 
     // Ask for giving a secret code
     while (secret_code < 1000 || secret_code > 9999) {
