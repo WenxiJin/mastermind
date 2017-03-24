@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
 #include "feedback.h"
 #include "userguess.h"
 #include "machineguess.h"
@@ -30,12 +31,15 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // Manually break by the user
     if (guessByUser(secret_code, &result)) {
         return 0;
     }
     printf("Unfortunately. You did not break the secret code :(\n\n");
     printf("********************************************************\n\n");
     printf("Now machine is guessing ...\n");
+
+    // Break by the machine in case the user failed
     gussByMachine(secret_code, invalidCode);
 
     return 0;
