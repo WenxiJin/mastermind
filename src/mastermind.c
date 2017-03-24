@@ -33,8 +33,8 @@ int main(int argc, char *argv[]) {
     if (guessByUser(secret_code, &result)) {
         return 0;
     }
-    printf("You lost :(\n\n");
-
+    printf("Unfortunately. You did not break the secret code :(\n\n");
+    printf("********************************************************\n\n");
     printf("Now machine is guessing ...\n");
     gussByMachine(secret_code, invalidCode);
 

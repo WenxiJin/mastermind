@@ -8,10 +8,10 @@ void gussByMachine(int secret_code, bool invalidCode[]) {
     int best_guess = 1122;  // Best initial guess
     int result = 0;
 
-    printf("Trying initial guess code: %d\n", best_guess);
+    printf("Trying init guess code: %d\n", best_guess);
     while (!checkGuess(secret_code, best_guess, &result)) {
         best_guess = giveBestGuess(invalidCode ,best_guess, result);
-        printf("Trying guess code: %d\n", best_guess);
+        printf("Trying next guess code: %d\n", best_guess);
     }
 
     printf("The secret code: %d\n", secret_code);
