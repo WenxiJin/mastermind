@@ -1,3 +1,6 @@
 build/
 googlemock/
 CTestTestfile.cmake
+GPATH
+GTAGS
+GRTAGS
